@@ -20,7 +20,7 @@ public partial class MainWindow : Window
     private const int LabCount = 4;
     private const int TrapCount = 2;
     private const int EnemyCount = 5;
-    private const double RespawnSeconds = 60.0;
+    private const double RespawnSeconds = 120.0;
 
     // Скорости
     private const double PlayerBaseSpeed = 6.5;   // клеток/сек
@@ -130,8 +130,8 @@ public partial class MainWindow : Window
         double availW = ActualWidth > 0 ? ActualWidth - 20 : SystemParameters.PrimaryScreenWidth - 20;
         double availH = ActualHeight > 0 ? ActualHeight - 20 : SystemParameters.PrimaryScreenHeight - 20;
 
-        int byW = Math.Max(8, (int)(availW / _maze.Width));
-        int byH = Math.Max(8, (int)(availH / _maze.Height));
+        int byW = Math.Max(8, (int)(availW / _maze.Width));   // по ширине
+        int byH = Math.Max(8, (int)(availH / _maze.Height));  // по высоте
         CellSize = Math.Max(8, Math.Min(byW, byH));
 
         GameCanvas.Width = _maze.Width * CellSize;
@@ -675,9 +675,9 @@ public partial class MainWindow : Window
     private void ShowQuiz(Coin coin)
     {
         _activeCoin = coin;
-        var q = PhysicsQuiz.Questions[coin.VariantIndex];
+        var q = PhysicsQuiz.GetRandom();
 
-        QuizTitle.Text = $"Вопрос по физике №{coin.VariantIndex + 1}";
+        QuizTitle.Text = "Вопрос по физике";
         QuizQuestionText.Text = q.Text;
         QuizFeedback.Text = "";
         QuizOptions.Items.Clear();
